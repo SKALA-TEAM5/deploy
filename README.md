@@ -11,6 +11,7 @@ argocd/team5-iveri.yaml
 The root application currently syncs these service manifests:
 
 - frontend: `SKALA-TEAM5/frontend`, path `k8s`
+- backend: `SKALA-TEAM5/backend`, path `k8s`
 - PostgreSQL: `SKALA-TEAM5/db`, path `k8s/postgres`
 - MinIO: `SKALA-TEAM5/db`, path `k8s/minio`
 
