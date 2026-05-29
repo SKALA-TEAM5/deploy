@@ -2,6 +2,13 @@
 
 This repository manages the top-level ArgoCD application for the i-veri service.
 
+## Branch and Environment Policy
+
+- `develop` is for integration review before production deployment.
+- `main` is the production GitOps source watched by ArgoCD.
+- Runtime settings should stay in each service repo's Kubernetes ConfigMap/Secret or GitHub Actions build args.
+- Do not commit real `.env` files or secret manifests.
+
 ## ArgoCD Root Application
 
 ```text
