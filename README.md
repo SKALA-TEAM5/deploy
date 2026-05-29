@@ -14,6 +14,16 @@ The root application currently syncs these service manifests:
 - backend: `SKALA-TEAM5/backend`, path `k8s`
 - PostgreSQL: `SKALA-TEAM5/db`, path `k8s/postgres`
 - MinIO: `SKALA-TEAM5/db`, path `k8s/minio`
+- Ingress: `SKALA-TEAM5/deploy`, path `k8s/ingress`
+
+## Public Endpoints
+
+The service uses the existing `public-nginx` IngressClass.
+
+```text
+Frontend: http://team5-iveri.skala25a.project.skala-ai.com
+Backend:  http://api-team5-iveri.skala25a.project.skala-ai.com
+```
 
 ## Apply
 

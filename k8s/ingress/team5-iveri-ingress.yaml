@@ -1,0 +1,30 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: team5-iveri-ingress
+  namespace: skala3-finalproj-class2-team5
+  labels:
+    app: team5-iveri
+spec:
+  ingressClassName: public-nginx
+  rules:
+    - host: team5-iveri.skala25a.project.skala-ai.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: team5-frontend
+                port:
+                  number: 3000
+    - host: api-team5-iveri.skala25a.project.skala-ai.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: team5-backend
+                port:
+                  number: 8000
