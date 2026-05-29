@@ -21,6 +21,7 @@ The root application currently syncs these service manifests:
 - backend: `SKALA-TEAM5/backend`, path `k8s`
 - PostgreSQL: `SKALA-TEAM5/db`, path `k8s/postgres`
 - MinIO: `SKALA-TEAM5/db`, path `k8s/minio`
+- Qdrant: `SKALA-TEAM5/qdrant`, path `k8s`
 - Ingress: `SKALA-TEAM5/deploy`, path `k8s/ingress`
 
 ## Public Endpoints
