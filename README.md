@@ -4,10 +4,21 @@ This repository manages the Kubernetes manifests and top-level ArgoCD applicatio
 
 ## Branch and Environment Policy
 
-- `develop` is for integration review before production deployment.
+- `develop` is the integration branch. Local integration tests are based on `develop`.
 - `main` is the production GitOps source watched by ArgoCD.
+- Avoid direct pushes to `main`; merge to `main` only after `develop` has been verified.
 - Runtime settings should stay in Kubernetes ConfigMap/Secret or GitHub Actions build args.
 - Do not commit real `.env` files or secret manifests.
+
+Local integration uses Kubernetes shared services through port-forward instead of local DB containers.
+
+```text
+PostgreSQL: team5-postgres
+Qdrant:     team5-qdrant
+MinIO:      team5-minio
+```
+
+Frontend, backend, Agent, and Vision development should copy each repo's `.env.example` first, then connect to the shared services through port-forward.
 
 ## ArgoCD Root Application
 
