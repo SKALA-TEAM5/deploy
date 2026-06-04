@@ -6,4 +6,5 @@ resources:
   - postgres
   - minio
   - qdrant
+  - vision
   - ingress
