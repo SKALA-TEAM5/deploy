@@ -52,6 +52,12 @@ spec:
         - name: vision
           image: amdp-registry.skala-ai.com/skala26a-ai2/team5-vision:latest
           imagePullPolicy: Always
+          command:
+            - sh
+            - -c
+            - |
+              mkdir -p "${VISION_INPUT_DIR}" "${VISION_OUTPUT_DIR}"
+              exec bentoml serve --host 0.0.0.0 --port 8002 service:VisionService
           ports:
             - name: http
               containerPort: 8002
