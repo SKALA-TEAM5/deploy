@@ -40,7 +40,15 @@ ArgoCD syncs these always-on service manifests:
 - `k8s/postgres`
 - `k8s/minio`
 - `k8s/qdrant`
+- `k8s/vision`
 - `k8s/ingress`
+
+Vision 모델 파일은 Git에 커밋하지 않습니다. `team5-vision` Pod의 initContainer가 MinIO에서 모델을 내려받아 `/models`에 주입합니다.
+
+```text
+safety-files/models/vision/ppe-detector.pt
+safety-files/models/vision/safety-net-classifier.pt
+```
 
 Batch Job manifests are stored in `k8s/batch`, but they are not included in the root `k8s/kustomization.yaml`.
 Run them from GitHub Actions or manually when ingestion is needed.

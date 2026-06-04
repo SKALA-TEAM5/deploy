@@ -21,6 +21,13 @@ spec:
     - host: api-team5-iveri.skala25a.project.skala-ai.com
       http:
         paths:
+          - path: /vision-results
+            pathType: Prefix
+            backend:
+              service:
+                name: team5-vision
+                port:
+                  number: 8002
           - path: /
             pathType: Prefix
             backend:

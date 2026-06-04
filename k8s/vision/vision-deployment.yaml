@@ -1,0 +1,92 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: team5-vision
+  namespace: skala3-finalproj-class2-team5
+  labels:
+    app: team5-vision
+spec:
+  replicas: 1
+  revisionHistoryLimit: 2
+  selector:
+    matchLabels:
+      app: team5-vision
+  template:
+    metadata:
+      labels:
+        app: team5-vision
+    spec:
+      imagePullSecrets:
+        - name: team5-harbor-secret
+      initContainers:
+        - name: download-models
+          image: minio/mc:latest
+          imagePullPolicy: IfNotPresent
+          envFrom:
+            - configMapRef:
+                name: team5-vision-config
+          env:
+            - name: APP_MINIO_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: team5-minio-secret
+                  key: APP_MINIO_ACCESS_KEY
+            - name: APP_MINIO_SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: team5-minio-secret
+                  key: APP_MINIO_SECRET_KEY
+          command:
+            - sh
+            - -c
+            - |
+              set -eu
+              mc alias set team5 "${APP_MINIO_ENDPOINT}" "${APP_MINIO_ACCESS_KEY}" "${APP_MINIO_SECRET_KEY}"
+              mc cp "team5/${APP_MINIO_BUCKET}/${VISION_MODEL_PREFIX}/ppe-detector.pt" /models/ppe-detector.pt
+              mc cp "team5/${APP_MINIO_BUCKET}/${VISION_MODEL_PREFIX}/safety-net-classifier.pt" /models/safety-net-classifier.pt
+              ls -lh /models
+          volumeMounts:
+            - name: vision-models
+              mountPath: /models
+      containers:
+        - name: vision
+          image: amdp-registry.skala-ai.com/skala26a-ai2/team5-vision:latest
+          imagePullPolicy: Always
+          ports:
+            - name: http
+              containerPort: 8002
+          envFrom:
+            - configMapRef:
+                name: team5-vision-config
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: http
+            initialDelaySeconds: 20
+            periodSeconds: 10
+            timeoutSeconds: 5
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: http
+            initialDelaySeconds: 60
+            periodSeconds: 20
+            timeoutSeconds: 5
+          resources:
+            requests:
+              cpu: 500m
+              memory: 1Gi
+            limits:
+              cpu: "2"
+              memory: 4Gi
+          volumeMounts:
+            - name: vision-models
+              mountPath: /models
+              readOnly: true
+            - name: vision-data
+              mountPath: /data
+      volumes:
+        - name: vision-models
+          emptyDir: {}
+        - name: vision-data
+          emptyDir: {}

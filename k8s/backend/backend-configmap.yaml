@@ -16,3 +16,6 @@ data:
   APP_MINIO_BUCKET: safety-files
   APP_CORS_ALLOWED_ORIGINS: http://team5-iveri.skala25a.project.skala-ai.com,http://localhost:3000
   APP_FASTAPI_BASE_URL: http://team5-fastapi:8001
+  VISION_AGENT_BASE_URL: http://team5-vision:8002
+  VISION_AGENT_REVIEW_PATH: /vision/review
+  VISION_AGENT_TIMEOUT_SECONDS: "120"
