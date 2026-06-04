@@ -45,6 +45,9 @@ ArgoCD syncs these always-on service manifests:
 Batch Job manifests are stored in `k8s/batch`, but they are not included in the root `k8s/kustomization.yaml`.
 Run them from GitHub Actions or manually when ingestion is needed.
 
+Database migration Job manifests are stored in `k8s/jobs`, but they are not included in the root `k8s/kustomization.yaml`.
+The `SKALA-TEAM5/db` migration workflow checks out this repository and applies the Flyway Job when migrations run.
+
 ## Public Endpoints
 
 The service uses the existing `public-nginx` IngressClass.
