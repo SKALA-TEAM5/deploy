@@ -1,12 +1,12 @@
 # Team5 i-veri Deployment
 
-This repository manages the top-level ArgoCD application for the i-veri service.
+This repository manages the Kubernetes manifests and top-level ArgoCD application for the i-veri service.
 
 ## Branch and Environment Policy
 
 - `develop` is for integration review before production deployment.
 - `main` is the production GitOps source watched by ArgoCD.
-- Runtime settings should stay in each service repo's Kubernetes ConfigMap/Secret or GitHub Actions build args.
+- Runtime settings should stay in Kubernetes ConfigMap/Secret or GitHub Actions build args.
 - Do not commit real `.env` files or secret manifests.
 
 ## ArgoCD Root Application
@@ -15,14 +15,24 @@ This repository manages the top-level ArgoCD application for the i-veri service.
 argocd/team5-iveri.yaml
 ```
 
-The root application currently syncs these service manifests:
+The root application watches this repository only:
 
-- frontend: `SKALA-TEAM5/frontend`, path `k8s`
-- backend: `SKALA-TEAM5/backend`, path `k8s`
-- PostgreSQL: `SKALA-TEAM5/db`, path `k8s/postgres`
-- MinIO: `SKALA-TEAM5/db`, path `k8s/minio`
-- Qdrant: `SKALA-TEAM5/qdrant`, path `k8s`
-- Ingress: `SKALA-TEAM5/deploy`, path `k8s/ingress`
+```text
+repo: SKALA-TEAM5/deploy
+path: k8s
+```
+
+ArgoCD syncs these always-on service manifests:
+
+- `k8s/frontend`
+- `k8s/backend`
+- `k8s/postgres`
+- `k8s/minio`
+- `k8s/qdrant`
+- `k8s/ingress`
+
+Batch Job manifests are stored in `k8s/batch`, but they are not included in the root `k8s/kustomization.yaml`.
+Run them from GitHub Actions or manually when ingestion is needed.
 
 ## Public Endpoints
 

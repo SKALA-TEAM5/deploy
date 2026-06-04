@@ -1,0 +1,3 @@
+resources:
+  - qdrant-service.yaml
+  - qdrant-statefulset.yaml
