@@ -3,6 +3,7 @@ kind: Kustomization
 resources:
   - frontend
   - backend
+  - fastapi
   - postgres
   - minio
   - qdrant
