@@ -50,7 +50,7 @@ spec:
               mountPath: /models
       containers:
         - name: vision
-          image: amdp-registry.skala-ai.com/skala26a-ai2/team5-vision:5dfaa76
+          image: amdp-registry.skala-ai.com/skala26a-ai2/team5-vision:e284dfb
           imagePullPolicy: Always
           command:
             - sh
