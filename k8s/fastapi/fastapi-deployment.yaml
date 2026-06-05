@@ -30,6 +30,13 @@ spec:
                 name: team5-fastapi-config
             - secretRef:
                 name: team5-fastapi-secret
+          env:
+            - name: TOKENIZERS_PARALLELISM
+              value: "false"
+            - name: OMP_NUM_THREADS
+              value: "1"
+            - name: MKL_NUM_THREADS
+              value: "1"
           readinessProbe:
             httpGet:
               path: /health
@@ -48,8 +55,8 @@ spec:
             failureThreshold: 10
           resources:
             requests:
-              cpu: 500m
-              memory: 2Gi
-            limits:
-              cpu: 2000m
+              cpu: "2"
               memory: 4Gi
+            limits:
+              cpu: "4"
+              memory: 8Gi
