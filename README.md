@@ -20,6 +20,17 @@ MinIO:      team5-minio
 
 Frontend, backend, Agent, and Vision development should copy each repo's `.env.example` first, then connect to the shared services through port-forward.
 
+## Local Port Forward
+
+Run all shared services on local ports from a single terminal:
+
+```bash
+./scripts/port-forward-all.sh
+```
+
+The script forwards frontend, backend, FastAPI, Vision, PostgreSQL, Qdrant,
+MinIO, and Argo CD. Press `Ctrl+C` once to stop every forwarding process.
+
 ## ArgoCD Root Application
 
 ```text
