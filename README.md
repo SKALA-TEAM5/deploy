@@ -30,6 +30,7 @@ Run all shared services on local ports from a single terminal:
 
 The script forwards frontend, backend, FastAPI, Vision, PostgreSQL, Qdrant,
 MinIO, and Argo CD. Press `Ctrl+C` once to stop every forwarding process.
+PostgreSQL uses local port `5433` because macOS may already use `5432`.
 
 ## ArgoCD Root Application
 
