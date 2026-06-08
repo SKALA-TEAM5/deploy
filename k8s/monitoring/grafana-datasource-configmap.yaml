@@ -10,6 +10,7 @@ data:
     apiVersion: 1
     datasources:
       - name: Team5 Prometheus
+        uid: team5-prometheus
         type: prometheus
         access: proxy
         url: http://team5-prometheus:9090

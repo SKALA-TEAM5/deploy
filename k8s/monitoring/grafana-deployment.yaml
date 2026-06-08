@@ -15,6 +15,8 @@ spec:
     metadata:
       labels:
         app: team5-grafana
+      annotations:
+        team5.skala-ai.com/config-revision: "2"
     spec:
       securityContext:
         fsGroup: 472
@@ -53,12 +55,24 @@ spec:
             - name: datasources
               mountPath: /etc/grafana/provisioning/datasources
               readOnly: true
+            - name: dashboard-providers
+              mountPath: /etc/grafana/provisioning/dashboards
+              readOnly: true
+            - name: dashboards
+              mountPath: /var/lib/grafana/dashboards
+              readOnly: true
             - name: data
               mountPath: /var/lib/grafana
       volumes:
         - name: datasources
           configMap:
             name: team5-grafana-datasources
+        - name: dashboard-providers
+          configMap:
+            name: team5-grafana-dashboard-providers
+        - name: dashboards
+          configMap:
+            name: team5-grafana-dashboards
         - name: data
           persistentVolumeClaim:
             claimName: team5-grafana-data
