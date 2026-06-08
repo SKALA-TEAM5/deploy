@@ -4,6 +4,7 @@ set -u
 
 APP_NAMESPACE="${APP_NAMESPACE:-skala3-finalproj-class2-team5}"
 ARGOCD_NAMESPACE="${ARGOCD_NAMESPACE:-skala-argocd}"
+ARGOCD_SERVICE="${ARGOCD_SERVICE:-skala-argocd-server}"
 LOG_DIR="${TMPDIR:-/tmp}/team5-port-forward"
 
 FORWARDS=(
@@ -16,7 +17,7 @@ FORWARDS=(
   "qdrant-grpc|${APP_NAMESPACE}|service/team5-qdrant|6334:6334"
   "minio-api|${APP_NAMESPACE}|service/team5-minio|9000:9000"
   "minio-console|${APP_NAMESPACE}|service/team5-minio|9001:9001"
-  "argocd|${ARGOCD_NAMESPACE}|service/argocd-server|8080:443"
+  "argocd|${ARGOCD_NAMESPACE}|service/${ARGOCD_SERVICE}|8080:443"
 )
 
 PIDS=()
