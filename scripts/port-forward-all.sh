@@ -17,6 +17,8 @@ QDRANT_GRPC_PORT="${QDRANT_GRPC_PORT:-16334}"
 MINIO_API_PORT="${MINIO_API_PORT:-19000}"
 MINIO_CONSOLE_PORT="${MINIO_CONSOLE_PORT:-19001}"
 ARGOCD_PORT="${ARGOCD_PORT:-18080}"
+GRAFANA_PORT="${GRAFANA_PORT:-13001}"
+PROMETHEUS_PORT="${PROMETHEUS_PORT:-19090}"
 
 FORWARDS=(
   "frontend|${APP_NAMESPACE}|service/team5-frontend|${FRONTEND_PORT}:3000"
@@ -28,6 +30,8 @@ FORWARDS=(
   "qdrant-grpc|${APP_NAMESPACE}|service/team5-qdrant|${QDRANT_GRPC_PORT}:6334"
   "minio-api|${APP_NAMESPACE}|service/team5-minio|${MINIO_API_PORT}:9000"
   "minio-console|${APP_NAMESPACE}|service/team5-minio|${MINIO_CONSOLE_PORT}:9001"
+  "grafana|${APP_NAMESPACE}|service/team5-grafana|${GRAFANA_PORT}:3000"
+  "prometheus|${APP_NAMESPACE}|service/team5-prometheus|${PROMETHEUS_PORT}:9090"
   "argocd|${ARGOCD_NAMESPACE}|service/${ARGOCD_SERVICE}|${ARGOCD_PORT}:443"
 )
 
@@ -105,6 +109,8 @@ echo "  Vision Docs   http://localhost:${VISION_PORT}/docs"
 echo "  PostgreSQL    localhost:${POSTGRES_PORT}"
 echo "  Qdrant        http://localhost:${QDRANT_HTTP_PORT}/dashboard"
 echo "  MinIO Console http://localhost:${MINIO_CONSOLE_PORT}"
+echo "  Grafana       http://localhost:${GRAFANA_PORT}"
+echo "  Prometheus    http://localhost:${PROMETHEUS_PORT}"
 echo "  Argo CD       https://localhost:${ARGOCD_PORT}"
 echo
 echo "모두 종료하려면 Ctrl+C를 누르세요."
