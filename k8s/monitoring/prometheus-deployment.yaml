@@ -18,7 +18,7 @@ spec:
       labels:
         app: team5-prometheus
       annotations:
-        team5.skala-ai.com/config-revision: "2"
+        team5.skala-ai.com/config-revision: "3"
     spec:
       securityContext:
         fsGroup: 65534

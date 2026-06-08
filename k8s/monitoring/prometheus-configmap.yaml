@@ -22,15 +22,3 @@ data:
         static_configs:
           - targets:
               - team5-backend:8000
-
-      - job_name: team5-vision
-        metrics_path: /metrics
-        static_configs:
-          - targets:
-              - team5-vision:8002
-
-      - job_name: team5-qdrant
-        metrics_path: /metrics
-        static_configs:
-          - targets:
-              - team5-qdrant:6333
