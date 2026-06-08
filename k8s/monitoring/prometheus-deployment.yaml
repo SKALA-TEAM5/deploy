@@ -61,5 +61,5 @@ spec:
           configMap:
             name: team5-prometheus-config
         - name: data
-          emptyDir:
-            sizeLimit: 2Gi
+          persistentVolumeClaim:
+            claimName: team5-prometheus-data

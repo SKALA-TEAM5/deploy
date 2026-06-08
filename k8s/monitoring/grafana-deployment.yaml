@@ -16,6 +16,8 @@ spec:
       labels:
         app: team5-grafana
     spec:
+      securityContext:
+        fsGroup: 472
       containers:
         - name: grafana
           image: grafana/grafana:11.5.2
@@ -58,5 +60,5 @@ spec:
           configMap:
             name: team5-grafana-datasources
         - name: data
-          emptyDir:
-            sizeLimit: 1Gi
+          persistentVolumeClaim:
+            claimName: team5-grafana-data
