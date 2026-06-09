@@ -20,7 +20,7 @@ spec:
         - name: team5-harbor-secret
       containers:
         - name: frontend
-          image: amdp-registry.skala-ai.com/skala26a-ai2/team5-frontend:1852ea6
+          image: amdp-registry.skala-ai.com/skala26a-ai2/team5-frontend:da5a5d0
           imagePullPolicy: Always
           ports:
             - name: http
