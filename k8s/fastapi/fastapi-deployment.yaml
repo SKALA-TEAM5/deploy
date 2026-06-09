@@ -34,9 +34,9 @@ spec:
             - name: TOKENIZERS_PARALLELISM
               value: "false"
             - name: OMP_NUM_THREADS
-              value: "1"
+              value: "4"
             - name: MKL_NUM_THREADS
-              value: "1"
+              value: "4"
           readinessProbe:
             httpGet:
               path: /health

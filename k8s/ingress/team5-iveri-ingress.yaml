@@ -8,12 +8,20 @@ metadata:
   annotations:
     # LLM/AI 에이전트 응답 대기 시간 (기본 60s → 600s)
     nginx.ingress.kubernetes.io/proxy-connect-timeout: "10"
-    nginx.ingress.kubernetes.io/proxy-send-timeout: "600"
-    nginx.ingress.kubernetes.io/proxy-read-timeout: "600"
+    nginx.ingress.kubernetes.io/proxy-send-timeout: "1200"
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "1200"
     # 대용량 파일 업로드 (OCR, PDF 등)
     nginx.ingress.kubernetes.io/proxy-body-size: "50m"
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
 spec:
   ingressClassName: public-nginx
+  tls:
+    - hosts:
+        - team5-iveri.skala25a.project.skala-ai.com
+        - api-team5-iveri.skala25a.project.skala-ai.com
+        - ai-team5-iveri.skala25a.project.skala-ai.com
+      secretName: team5-iveri-tls
   rules:
     - host: team5-iveri.skala25a.project.skala-ai.com
       http:
