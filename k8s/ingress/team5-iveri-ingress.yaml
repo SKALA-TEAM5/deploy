@@ -5,6 +5,13 @@ metadata:
   namespace: skala3-finalproj-class2-team5
   labels:
     app: team5-iveri
+  annotations:
+    # LLM/AI 에이전트 응답 대기 시간 (기본 60s → 600s)
+    nginx.ingress.kubernetes.io/proxy-connect-timeout: "10"
+    nginx.ingress.kubernetes.io/proxy-send-timeout: "600"
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "600"
+    # 대용량 파일 업로드 (OCR, PDF 등)
+    nginx.ingress.kubernetes.io/proxy-body-size: "50m"
 spec:
   ingressClassName: public-nginx
   rules:
