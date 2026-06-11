@@ -30,3 +30,6 @@ data:
   VISION_AGENT_TIMEOUT_SECONDS: "120"
   HF_HUB_OFFLINE: "1"
   TRANSFORMERS_OFFLINE: "1"
+  OCR_ENGINE: "vlm"  # "vlm" or "clova"
+  VLM_PROVIDER: "gemini"
+  GEMINI_MODEL: "gemini-3.1-flash-lite"
