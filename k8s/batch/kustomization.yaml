@@ -1,4 +1,5 @@
 resources:
   - qdrant-ingest-job.yaml
   - qdrant-refresh-job.yaml
+  - qdrant-refresh-cronjob.yaml
   - safety-doc-reference-ingest-job.yaml
