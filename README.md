@@ -97,3 +97,15 @@ kubectl annotate application team5-iveri \
 ```bash
 kubectl get application team5-iveri -n skala-argocd
 ```
+
+## Monitoring
+
+Prometheus는 Backend의 `/actuator/prometheus`와 FastAPI의 `/metrics`를 수집합니다.
+Grafana에는 Backend/FastAPI 기본 대시보드와 `Team5 AI Agent Overview`가 자동 provisioning됩니다.
+
+AI Agent 대시보드와 알림 설정:
+
+```text
+k8s/monitoring/grafana-ai-agent-dashboard-configmap.yaml
+k8s/monitoring/prometheus-configmap.yaml
+```
