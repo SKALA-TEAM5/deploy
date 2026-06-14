@@ -16,7 +16,7 @@ spec:
       labels:
         app: team5-grafana
       annotations:
-        team5.skala-ai.com/config-revision: "2"
+        team5.skala-ai.com/config-revision: "3"
     spec:
       securityContext:
         fsGroup: 472
@@ -71,8 +71,12 @@ spec:
           configMap:
             name: team5-grafana-dashboard-providers
         - name: dashboards
-          configMap:
-            name: team5-grafana-dashboards
+          projected:
+            sources:
+              - configMap:
+                  name: team5-grafana-dashboards
+              - configMap:
+                  name: team5-grafana-ai-agent-dashboards
         - name: data
           persistentVolumeClaim:
             claimName: team5-grafana-data

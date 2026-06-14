@@ -1,0 +1,206 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: team5-grafana-ai-agent-dashboards
+  namespace: skala3-finalproj-class2-team5
+  labels:
+    app: team5-grafana
+data:
+  ai-agent-overview.json: |
+    {
+      "annotations": {
+        "list": []
+      },
+      "editable": false,
+      "graphTooltip": 1,
+      "panels": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "team5-prometheus"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "unit": "reqps"
+            }
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 12,
+            "x": 0,
+            "y": 0
+          },
+          "id": 1,
+          "targets": [
+            {
+              "expr": "sum by (agent, result) (rate(ai_agent_runs_total[$__rate_interval]))",
+              "legendFormat": "{{agent}} / {{result}}",
+              "refId": "A"
+            }
+          ],
+          "title": "Agent 실행률",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "team5-prometheus"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "unit": "s"
+            }
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 12,
+            "x": 12,
+            "y": 0
+          },
+          "id": 2,
+          "targets": [
+            {
+              "expr": "histogram_quantile(0.95, sum by (le, agent) (rate(ai_agent_run_duration_seconds_bucket[$__rate_interval])))",
+              "legendFormat": "{{agent}}",
+              "refId": "A"
+            }
+          ],
+          "title": "Agent P95 실행시간",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "team5-prometheus"
+          },
+          "gridPos": {
+            "h": 7,
+            "w": 8,
+            "x": 0,
+            "y": 8
+          },
+          "id": 3,
+          "targets": [
+            {
+              "expr": "sum by (agent) (ai_agent_runs_in_progress)",
+              "legendFormat": "{{agent}}",
+              "refId": "A"
+            }
+          ],
+          "title": "실행 중 Agent",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "team5-prometheus"
+          },
+          "gridPos": {
+            "h": 7,
+            "w": 8,
+            "x": 8,
+            "y": 8
+          },
+          "id": 4,
+          "targets": [
+            {
+              "expr": "sum by (agent) (increase(ai_agent_review_items_total[$__range]))",
+              "legendFormat": "{{agent}}",
+              "refId": "A"
+            }
+          ],
+          "title": "HIL 및 TODO 발생량",
+          "type": "barchart"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "team5-prometheus"
+          },
+          "gridPos": {
+            "h": 7,
+            "w": 8,
+            "x": 16,
+            "y": 8
+          },
+          "id": 5,
+          "targets": [
+            {
+              "expr": "sum by (agent, type) (increase(ai_agent_tokens_total[$__range]))",
+              "legendFormat": "{{agent}} / {{type}}",
+              "refId": "A"
+            }
+          ],
+          "title": "Agent 토큰 사용량",
+          "type": "barchart"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "team5-prometheus"
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 12,
+            "x": 0,
+            "y": 15
+          },
+          "id": 6,
+          "targets": [
+            {
+              "expr": "sum by (operation, result) (rate(backend_agent_dispatch_total[$__rate_interval]))",
+              "legendFormat": "{{operation}} / {{result}}",
+              "refId": "A"
+            }
+          ],
+          "title": "Backend FastAPI Dispatch",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "team5-prometheus"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "unit": "s"
+            }
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 12,
+            "x": 12,
+            "y": 15
+          },
+          "id": 7,
+          "targets": [
+            {
+              "expr": "histogram_quantile(0.95, sum by (le, operation) (rate(backend_agent_dispatch_duration_seconds_bucket[$__rate_interval])))",
+              "legendFormat": "{{operation}}",
+              "refId": "A"
+            }
+          ],
+          "title": "Backend Dispatch P95",
+          "type": "timeseries"
+        }
+      ],
+      "refresh": "30s",
+      "schemaVersion": 40,
+      "tags": [
+        "team5",
+        "ai-agent",
+        "fastapi",
+        "backend"
+      ],
+      "templating": {
+        "list": []
+      },
+      "time": {
+        "from": "now-6h",
+        "to": "now"
+      },
+      "timezone": "browser",
+      "title": "Team5 AI Agent Overview",
+      "uid": "team5-ai-agent-overview",
+      "version": 1
+    }
