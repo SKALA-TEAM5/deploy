@@ -15,6 +15,7 @@ Local integration uses Kubernetes shared services through port-forward instead o
 ```text
 PostgreSQL: team5-postgres
 Qdrant:     team5-qdrant
+Redis:      team5-redis
 MinIO:      team5-minio
 ```
 
@@ -29,7 +30,7 @@ Run all shared services on local ports from a single terminal:
 ```
 
 The script forwards frontend, backend, FastAPI, Vision, PostgreSQL, Qdrant,
-MinIO, and Argo CD. Press `Ctrl+C` once to stop every forwarding process.
+Redis, MinIO, and Argo CD. Press `Ctrl+C` once to stop every forwarding process.
 PostgreSQL uses local port `5433` because macOS may already use `5432`.
 
 ## ArgoCD Root Application
@@ -52,6 +53,7 @@ ArgoCD syncs these always-on service manifests:
 - `k8s/postgres`
 - `k8s/minio`
 - `k8s/qdrant`
+- `k8s/redis`
 - `k8s/vision`
 - `k8s/ingress`
 
