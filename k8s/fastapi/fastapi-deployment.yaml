@@ -20,7 +20,7 @@ spec:
         - name: team5-harbor-secret
       containers:
         - name: fastapi
-          image: amdp-registry.skala-ai.com/skala26a-ai2/team5-fastapi:be5b332
+          image: amdp-registry.skala-ai.com/skala26a-ai2/team5-fastapi:a1e37ca
           imagePullPolicy: Always
           ports:
             - name: http
